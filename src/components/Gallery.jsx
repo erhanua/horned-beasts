@@ -3,7 +3,7 @@ import galleryOfBeasts from "./data"; // Import the new data
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
-function Gallery() {
+function Gallery({ handleShowModal }) {
   return (
     <Container>
       <Row>
@@ -13,6 +13,7 @@ function Gallery() {
               title={beast.title}
               imageUrl={beast.image_url}
               description={beast.description}
+              onClick={() => handleShowModal(beast)}
             />
           </Col>
         ))}
