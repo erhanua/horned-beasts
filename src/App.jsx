@@ -12,10 +12,12 @@ function App() {
   const [modalShow, setModalShow] = useState(false);
 
   const [searchInput, setSearchInput] = useState("");
+  const [hornCount, setHornCount] = useState("");
   const filteredBeasts = galleryOfBeasts.filter(
     (beast) =>
-      beast.title.toLowerCase().includes(searchInput.toLowerCase()) ||
-      beast.keyword.toLowerCase().includes(searchInput.toLowerCase())
+      (beast.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+        beast.keyword.toLowerCase().includes(searchInput.toLowerCase())) &&
+      (hornCount ? beast.horns === parseInt(hornCount) : true)
   );
 
   const handleShowModal = (beast) => {
@@ -28,7 +30,7 @@ function App() {
   };
   return (
     <div className="app">
-      <Header setSearchInput={setSearchInput} />
+      <Header setSearchInput={setSearchInput} setHornCount={setHornCount} />
       <Gallery beasts={filteredBeasts} handleShowModal={handleShowModal} />
       <SelectedBeast
         show={modalShow}
