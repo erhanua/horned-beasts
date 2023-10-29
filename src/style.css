@@ -40,3 +40,8 @@ footer {
   font-size: 20px;
   color: red;
 }
+.form-input {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}

@@ -5,10 +5,18 @@ import Header from "./components/Header";
 import "./style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SelectedBeast from "./components/Modal";
+import galleryOfBeasts from "./components/data";
 
 function App() {
   const [selectedBeast, setSelectedBeast] = useState(null);
   const [modalShow, setModalShow] = useState(false);
+
+  const [searchInput, setSearchInput] = useState("");
+  const filteredBeasts = galleryOfBeasts.filter(
+    (beast) =>
+      beast.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+      beast.keyword.toLowerCase().includes(searchInput.toLowerCase())
+  );
 
   const handleShowModal = (beast) => {
     setSelectedBeast(beast);
@@ -20,8 +28,8 @@ function App() {
   };
   return (
     <div className="app">
-      <Header />
-      <Gallery handleShowModal={handleShowModal} />
+      <Header setSearchInput={setSearchInput} />
+      <Gallery beasts={filteredBeasts} handleShowModal={handleShowModal} />
       <SelectedBeast
         show={modalShow}
         handleClose={handleCloseModal}
